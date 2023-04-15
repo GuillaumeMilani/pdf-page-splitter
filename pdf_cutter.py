@@ -56,19 +56,19 @@ class PDFSplitterApp:
                 # Cut vertically
                 page_width = page.mediabox.width
 
-                top_middle = page.cropbox.top_right
-                top_middle = (page_width / 2, top_middle[1])
+                upper_middle = page.cropbox.upper_right
+                upper_middle = (page_width / 2, upper_middle[1])
 
                 lower_middle = page.cropbox.lower_right
                 lower_middle = (page_width / 2, lower_middle[1])
 
                 # Create two new pages from the halves
                 first_page = output_pdf.add_page(page)
-                first_page.cropbox.top_right = top_middle
+                first_page.cropbox.top_right = upper_middle
                 first_page.cropbox.lower_right = lower_middle
 
                 second_page = output_pdf.add_page(page)
-                second_page.cropbox.top_left = top_middle
+                second_page.cropbox.top_left = upper_middle
                 second_page.cropbox.lower_left = lower_middle
             else:
                 # Cut horizontally
