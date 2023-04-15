@@ -51,9 +51,6 @@ class PDFSplitterApp:
         for page_num in range(len(input_pdf.pages)):
             page = input_pdf.pages[page_num]
 
-            first_page = output_pdf.add_page(page)
-            second_page = output_pdf.add_page(page)
-
             # Get the dimensions of the page, it can have been rotated
             if page.mediabox.height < page.mediabox.width:
                 # Cut vertically
@@ -66,9 +63,11 @@ class PDFSplitterApp:
                 lower_middle = (page_width / 2, lower_middle[1])
 
                 # Create two new pages from the halves
+                first_page = output_pdf.add_page(page)
                 first_page.cropbox.top_right = top_middle
                 first_page.cropbox.lower_right = lower_middle
 
+                second_page = output_pdf.add_page(page)
                 second_page.cropbox.top_left = top_middle
                 second_page.cropbox.lower_left = lower_middle
             else:
